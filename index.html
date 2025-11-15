@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes">
     <title>Customer Registration Form</title>
     <style>
         /* Apply the background image to the entire page */
@@ -15,21 +15,21 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            overflow: auto; /* Allow scrolling */
         }
 
         /* Top border and container styling */
         .form-container {
             background: white; /* Set the background to solid white (no transparency) */
-            padding: 20px;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%; /* Make the form container take 90% of screen width */
-            max-width: 500px; /* Max width for the form */
+            width: 90%; /* Form container takes 90% of the screen width */
+            max-width: 500px; /* Maximum width for the form */
             box-sizing: border-box;
-            margin: 50px auto; /* Center the form */
+            margin: 50px auto; /* Center the form and create a margin from top and bottom */
             border-top: 10px solid #FF7F00; /* Increased top border thickness */
-            overflow: hidden; /* Prevent overflow inside the form */
+            overflow-y: hidden; /* Prevent vertical scroll */
         }
 
         h2 {
