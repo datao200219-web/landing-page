@@ -98,7 +98,7 @@
         <h2>Register Your Information</h2>
 
         <!-- Registration Form -->
-        <form action="submit_form.php" method="POST" id="form">
+        <form id="form">
             <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phone" required><br><br>
 
@@ -115,14 +115,26 @@
     </div>
 
     <script>
-        // Ensure the user checks the privacy policy checkbox before submitting the form
+        // Handle form submission and redirect to the bot with the form data
         const form = document.getElementById("form");
         form.addEventListener("submit", function(event) {
-            const agreeCheckbox = document.getElementById("agree");
+            event.preventDefault(); // Prevent the default form submission
+
+            const phone = document.getElementById("phone").value; // Get the phone number
+            const email = document.getElementById("email").value; // Get the email
+            const agreeCheckbox = document.getElementById("agree"); // Get the agree checkbox
+
+            // Ensure user agrees to the privacy policy before submitting
             if (!agreeCheckbox.checked) {
                 alert("You must agree to the privacy policy to submit the form.");
-                event.preventDefault(); // Prevent the form submission
+                return; // If not agreed, prevent form submission
             }
+
+            // Construct the URL for the Telegram bot with query parameters
+            const botUrl = `https://t.me/Mynew0998bot?phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}`;
+
+            // Redirect to the Telegram bot with the user data
+            window.location.href = botUrl;
         });
     </script>
 </body>
