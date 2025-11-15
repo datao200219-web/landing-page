@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>Customer Registration Form</title>
     <style>
         /* Apply the background image to the entire page */
         body, html {
             font-family: 'Arial', sans-serif;
-            font-weight: bold; /* Apply bold font weight to the entire page */
+            font-weight: bold;
             background: url('images/background.jpg') no-repeat center center fixed;
-            background-size: cover; /* Ensures the background image covers the whole page */
-            background-position: center; /* Center the image */
+            background-size: cover;
+            background-position: center;
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
         }
 
         /* Top border and container styling */
         .form-container {
             background: white; /* Set the background to solid white (no transparency) */
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%; /* Extend the width to match the required frame */
-            max-width: 500px; /* Increase the maximum width for the form */
+            width: 90%; /* Make the form container take 90% of screen width */
+            max-width: 500px; /* Max width for the form */
             box-sizing: border-box;
-            margin: 100px auto;
+            margin: 50px auto; /* Center the form */
             border-top: 10px solid #FF7F00; /* Increased top border thickness */
-            overflow: auto; /* Allow scrolling inside the form container if needed */
+            overflow: hidden; /* Prevent overflow inside the form */
         }
 
         h2 {
@@ -64,10 +64,10 @@
 
         /* Styling the submit button */
         input[type="submit"] {
-            background-color: #FF7F00; /* Orange color */
+            background-color: #FF7F00;
             color: white;
-            font-size: 18px; /* Increase font size */
-            font-weight: bold; /* Bold text */
+            font-size: 18px;
+            font-weight: bold;
             padding: 12px;
             width: 100%;
             border: none;
@@ -82,7 +82,7 @@
 
         /* Hide the "I agree to the Privacy Policy:" part of the text */
         .privacy-policy span {
-            display: none; /* Hide the "I agree to the Privacy Policy:" part */
+            display: none;
         }
 
         .privacy-policy {
@@ -131,7 +131,7 @@
                 Your personal information will only be used by customer service to serve you and will not be disclosed to any third party. If you wish to have it deleted, please contact customer service.
             </label><br><br>
 
-            <input type="submit" value="Click here to send telegram">
+            <input type="submit" value="Click here to send a telegram">
         </form>
     </div>
 
