@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>Customer Registration Form</title>
     <style>
         /* Apply the background image to the entire page */
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: auto; /* Allow scrolling */
+            overflow: hidden; /* Prevent scrolling of the entire page */
         }
 
         /* Top border and container styling */
@@ -24,12 +24,12 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%; /* Form container takes 90% of the screen width */
+            width: 90%; /* Make the form container take 90% of screen width */
             max-width: 500px; /* Maximum width for the form */
             box-sizing: border-box;
-            margin: 50px auto; /* Center the form and create a margin from top and bottom */
+            margin: 100px auto; /* Center the form with space from top and bottom */
             border-top: 10px solid #FF7F00; /* Increased top border thickness */
-            overflow-y: hidden; /* Prevent vertical scroll */
+            overflow: hidden; /* Prevent vertical scroll */
         }
 
         h2 {
@@ -101,7 +101,12 @@
             text-decoration: underline;
         }
 
-        /* Adding responsiveness for smaller screens */
+        /* Disable page scroll on touch action for the form */
+        body {
+            touch-action: manipulation; /* Prevent scrolling */
+        }
+
+        /* Ensure the form container displays properly on small screens */
         @media screen and (max-width: 600px) {
             .form-container {
                 padding: 20px;
