@@ -6,32 +6,43 @@
     <title>Customer Registration Form</title>
     <style>
         /* Apply the background image to the entire page */
-        body {
+        body, html {
             font-family: 'Arial', sans-serif;
+            font-weight: bold; /* Apply bold font weight to the entire page */
             background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover; /* Ensures the background image covers the whole page */
             background-position: center; /* Center the image */
             margin: 0;
             padding: 0;
-            height: 100vh;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
         }
 
-        /* Container for form */
+        /* Top border and container styling */
         .form-container {
-            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background for form */
+            background: white; /* Set the background to solid white (no transparency) */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+            width: 100%; /* Extend the width to match the required frame */
+            max-width: 500px; /* Increase the maximum width for the form */
             box-sizing: border-box;
             margin: 100px auto;
+            border-top: 10px solid #FF7F00; /* Increased top border thickness */
+            overflow: auto; /* Allow scrolling inside the form container if needed */
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
+        }
+
+        /* Add red asterisk before label */
+        label::before {
+            content: "*";
+            color: red;
+            margin-right: 5px;
         }
 
         label {
@@ -41,7 +52,7 @@
             color: #555;
         }
 
-        input[type="text"], input[type="email"] {
+        input[type="text"], input[type="email"], input[type="number"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0 20px 0;
@@ -53,9 +64,10 @@
 
         /* Styling the submit button */
         input[type="submit"] {
-            background-color: #4CAF50;
+            background-color: #FF7F00; /* Orange color */
             color: white;
-            font-size: 16px;
+            font-size: 18px; /* Increase font size */
+            font-weight: bold; /* Bold text */
             padding: 12px;
             width: 100%;
             border: none;
@@ -65,10 +77,14 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #FF6F00; /* Darker orange on hover */
         }
 
-        /* Styling for Privacy Policy */
+        /* Hide the "I agree to the Privacy Policy:" part of the text */
+        .privacy-policy span {
+            display: none; /* Hide the "I agree to the Privacy Policy:" part */
+        }
+
         .privacy-policy {
             font-size: 14px;
             color: #666;
@@ -89,6 +105,7 @@
         @media screen and (max-width: 600px) {
             .form-container {
                 padding: 20px;
+                margin: 20px; /* Adjusted margins for small screens */
             }
         }
     </style>
@@ -99,6 +116,9 @@
 
         <!-- Registration Form -->
         <form id="form">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br><br>
+
             <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phone" required><br><br>
 
@@ -107,10 +127,11 @@
 
             <label class="privacy-policy">
                 <input type="checkbox" name="agree" id="agree" required>
-                I agree to the <strong>Privacy Policy</strong>: Your personal information will only be used by customer service to serve you and will not be disclosed to any third party. If you wish to have it deleted, please contact customer service.
+                <span>I agree to the Privacy Policy:</span>
+                Your personal information will only be used by customer service to serve you and will not be disclosed to any third party. If you wish to have it deleted, please contact customer service.
             </label><br><br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Click here to send telegram">
         </form>
     </div>
 
@@ -120,6 +141,7 @@
         form.addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent the default form submission
 
+            const age = document.getElementById("age").value; // Get the age
             const phone = document.getElementById("phone").value; // Get the phone number
             const email = document.getElementById("email").value; // Get the email
             const agreeCheckbox = document.getElementById("agree"); // Get the agree checkbox
@@ -131,7 +153,7 @@
             }
 
             // Construct the URL for the Telegram bot with query parameters
-            const botUrl = `https://t.me/Mynew0998bot?phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}`;
+            const botUrl = `https://t.me/Mynew0998bot?age=${encodeURIComponent(age)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}`;
 
             // Redirect to the Telegram bot with the user data
             window.location.href = botUrl;
