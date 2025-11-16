@@ -147,6 +147,9 @@
             // Construct the URL for the Telegram bot with query parameters
             const botUrl = `https://t.me/Mynew0998bot?start=${encodeURIComponent(`name=${document.getElementById('name').value}&phone=${phone}&email=${email}`)}`;
 
+            // Debugging: Log the URL to the console
+            console.log("Redirecting to URL:", botUrl);
+
             // Redirect to the Telegram bot with the data as URL parameters
             window.location.href = botUrl;
         });
