@@ -107,6 +107,7 @@
                 margin: 20px;
             }
         }
+
     </style>
 </head>
 <body>
@@ -159,11 +160,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
-                        // Hide the form and show a success message
-                        document.getElementById("form-container").innerHTML = "<h2>Thank you for registering! Your information has been recorded.</h2>";
-
-                        // Redirect to the Telegram bot after form submission
-                        window.location.href = `https://t.me/yourbotusername`;  // Change with your actual bot's URL
+                        // Redirect to the Telegram bot after submitting the form
+                        window.location.href = `https://t.me/Mynew0998bot`;  // Change with your actual bot's URL
                     } else {
                         alert("Failed to send information. Please try again.");
                     }
