@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Customer Registration Form</title>
+    <style>
+        body, html {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling of the entire page */
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            box-sizing: border-box;
+            margin: 60px auto 20px auto;
+            border-top: 10px solid #FF7F00;
+            overflow: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Add red asterisk before label */
+        label::before {
+            content: "*";
+            color: red;
+            margin-right: 5px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #FF7F00;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #FF6F00; /* Darker orange on hover */
+        }
+
+        .privacy-policy span {
+            display: none;
+        }
+
+        .privacy-policy {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .privacy-policy a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .privacy-policy a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            touch-action: manipulation;
+        }
+
+        @media screen and (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register Your Information</h2>
+
+        <!-- Registration Form -->
+        <form id="form" action="https://landing-page-eta-ten-60.vercel.app/submit" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required><br><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label class="privacy-policy">
+                <input type="checkbox" name="agree" id="agree" required>
+                <span>I agree to the Privacy Policy:</span>
+                Your personal information will only be used by customer service to serve you and will not be disclosed to any third party. If you wish to have it deleted, please contact customer service.
+            </label><br><br>
+
+            <input type="submit" value="Click here to send telegram">
+        </form>
+    </div>
+
+    <script>
+        // Handle form submission and redirect to the bot with the form data
+        const form = document.getElementById("form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const age = document.getElementById("age").value; // Get the age
+            const phone = document.getElementById("phone").value; // Get the phone number
+            const email = document.getElementById("email").value; // Get the email
+            const agreeCheckbox = document.getElementById("agree"); // Get the agree checkbox
+
+            // Ensure user agrees to the privacy policy before submitting
+            if (!agreeCheckbox.checked) {
+                alert("You must agree to the privacy policy to submit the form.");
+                return; // If not agreed, prevent form submission
+            }
+
+            // Construct the URL for the Telegram bot with query parameters
+            const botUrl = `https://api.telegram.org/bot8093303170:AAHEfQZcx-13yF8j0S2G3Gb_8-6AOH6pQdQ/sendMessage?chat_id=-5046379633&text=Age: ${encodeURIComponent(age)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}`;
+
+            // Send the data to Telegram bot using fetch
+            fetch(botUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("Information successfully sent to Telegram bot.");
+                    } else {
+                        alert("Failed to send information. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Something went wrong. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>
