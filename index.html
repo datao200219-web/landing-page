@@ -1,41 +1,164 @@
-<script>
-    const form = document.getElementById("form");
-    form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const age = document.getElementById("age").value; // Get the age
-        const phone = document.getElementById("phone").value; // Get the phone number
-        const email = document.getElementById("email").value; // Get the email
-        const agreeCheckbox = document.getElementById("agree"); // Get the agree checkbox
-
-        // Ensure user agrees to the privacy policy before submitting
-        if (!agreeCheckbox.checked) {
-            alert("You must agree to the privacy policy to submit the form.");
-            return; // If not agreed, prevent form submission
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Customer Registration Form</title>
+    <style>
+        body, html {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
         }
 
-        // Prepare the data to send to the backend
-        const data = { phone, email, age };
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            box-sizing: border-box;
+            margin: 60px auto 20px auto;
+            border-top: 10px solid #FF7F00;
+        }
 
-        // Send data to backend server (assuming backend is running on localhost:3000)
-        fetch("http://localhost:3000/submit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.customerLink) {
-                window.location.href = data.customerLink;  // Redirect to customer service link
-            } else {
-                alert("There was an issue processing your request. Please try again.");
-            }
-        })
-        .catch((error) => {
-            alert("There was an error submitting the form!");
-            console.error("Error:", error);
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label::before {
+            content: "*";
+            color: red;
+            margin-right: 5px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #FF7F00;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #FF6F00;
+        }
+
+        .privacy-policy {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .privacy-policy a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .privacy-policy a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register Your Information</h2>
+        <form id="form">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required><br><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label class="privacy-policy">
+                <input type="checkbox" name="agree" id="agree" required>
+                I agree to the Privacy Policy:
+                Your personal information will only be used by customer service to serve you and will not be disclosed to any third party.
+            </label><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        // Ensure the script runs after the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("form");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();  // Prevent default form submission
+
+                const age = document.getElementById("age").value;
+                const phone = document.getElementById("phone").value;
+                const email = document.getElementById("email").value;
+                const agreeCheckbox = document.getElementById("agree");
+
+                if (!agreeCheckbox.checked) {
+                    alert("You must agree to the privacy policy to submit the form.");
+                    return; // Prevent form submission if not agreed
+                }
+
+                const data = { phone, email, age };
+
+                fetch("http://localhost:3000/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.customerLink) {
+                        window.location.href = data.customerLink; // Redirect to customer service link
+                    } else {
+                        alert("There was an issue processing your request. Please try again.");
+                    }
+                })
+                .catch((error) => {
+                    alert("There was an error submitting the form!");
+                    console.error("Error:", error);
+                });
+            });
         });
-    });
-</script>
+    </script>
+</body>
+</html>
