@@ -138,6 +138,10 @@
 
                 const data = { phone, email, age };
 
+                // Supabase URL and Key
+                const supabaseUrl = "https://cgvpwyiovztzjrnqqnje.supabase.co";
+                const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNndnB3eWlvdnp0empybnFxbmplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzNjUxOTMsImV4cCI6MjA3ODk0MTE5M30.yxtJ_4wjSNSUl-JV5J-B5EA4cGGOvSLPYPD0B1gEpd8";  // Replace with your anon key
+
                 // Updated fetch URL with your deployed backend URL
                 fetch("https://landing-page-eta-ten-60.vercel.app/submit", {
                     method: "POST",
