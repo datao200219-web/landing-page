@@ -124,7 +124,7 @@
                 Your personal information will only be used by customer service to serve you and will not be disclosed to any third party. If you wish to have it deleted, please contact customer service.
             </label><br><br>
 
-            <input type="submit" value="Click here to send telegram">
+            <input type="submit" value="Submit">
         </form>
     </div>
 
@@ -144,14 +144,27 @@
                 return; // If not agreed, prevent form submission
             }
 
-            // Construct the URL for the Telegram bot with query parameters
-            const botUrl = `https://t.me/Mynew0998bot?start=${encodeURIComponent(`phone=${phone}&email=${email}`)}`;
+            // Prepare the data to send to the backend
+            const data = { phone, email, age };
 
-            // Debugging: Log the URL to the console
-            console.log("Redirecting to URL:", botUrl);
-
-            // Redirect to the Telegram bot with the data as URL parameters
-            window.location.href = botUrl;
+            // Send data to backend server (assuming backend is running on localhost:3000)
+            fetch("http://localhost:3000/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Form submitted successfully!");
+                console.log(data);
+                // After successful submission, handle redirect or other actions
+            })
+            .catch((error) => {
+                alert("There was an error submitting the form!");
+                console.error("Error:", error);
+            });
         });
     </script>
 </body>
